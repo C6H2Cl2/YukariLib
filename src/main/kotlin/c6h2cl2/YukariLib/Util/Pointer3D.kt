@@ -22,11 +22,9 @@ class Pointer3D(private var x: Double, private var y: Double, private var z: Dou
     fun getZ(): Double = z
 
     constructor(x: Int, y: Int, z: Int): this(x.toDouble(), y.toDouble(), z.toDouble())
-
+    constructor(x: Float, y: Float, z: Float): this(x.toDouble(), y.toDouble(), z.toDouble())
     constructor(vec: Vec3): this(vec.xCoord, vec.yCoord, vec.zCoord)
-
     constructor(pos: BlockPos): this(pos.getX(), pos.getY(), pos.getZ())
-
     constructor(tagCompound: NBTTagCompound, tagName: String = "BlockPosD"): this(0.0, 0.0, 0.0) {
         this.readFromNBT(tagCompound, tagName)
     }
