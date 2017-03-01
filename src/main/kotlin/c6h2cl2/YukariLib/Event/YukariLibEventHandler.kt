@@ -1,7 +1,7 @@
 package c6h2cl2.YukariLib.Event
 
-import c6h2cl2.YukariLib.Render.ISpecialSelectedBox
-import c6h2cl2.YukariLib.Render.RenderSpecialSelectedBox
+import c6h2cl2.YukariLib.Render.ICustomSelectedBox
+import c6h2cl2.YukariLib.Render.RenderCustomSelectedBox
 import c6h2cl2.YukariLib.Util.BlockPos
 import c6h2cl2.YukariLib.YukariLibCore
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
@@ -32,9 +32,9 @@ class YukariLibEventHandler {
         val pos = BlockPos(MOP.blockX, MOP.blockY, MOP.blockZ)
 
         if (player != null) {
-            val tile = pos.getTileEntityFromPos(world)
-            if (tile is ISpecialSelectedBox && tile.shouldRenderBox(MOP.subHit, player)) {
-                RenderSpecialSelectedBox().drawSelectionBox(player, MOP, event.partialTicks, tile.getSpecialSelectedBox(MOP.subHit, player))
+            val block = pos.getBlockFromPos(world)
+            if (block is ICustomSelectedBox && block.shouldRenderBox(MOP.subHit, player)) {
+                RenderCustomSelectedBox().drawSelectionBox(player, MOP, event.partialTicks, block.getCustomSelectedBox(MOP.subHit, player))
             }
         }
     }

@@ -62,6 +62,8 @@ data class BlockPos(private var x: Int, private var y: Int, private var z: Int) 
 
     fun getBlockFromPos(world: World): Block = world.getBlock(x, y, z)
 
+    fun getMetaFromPos(world: World): Int = world.getBlockMetadata(x, y, z)
+
     fun getDistance(posFrom: BlockPos, posTo: BlockPos): Double {
         return Math.sqrt(Math.pow((posFrom.x - posTo.x).toDouble(), 2.0) + Math.pow((posFrom.y - posTo.y).toDouble(), 2.0) + Math.pow((posFrom.z - posTo.z).toDouble(), 2.0))
     }

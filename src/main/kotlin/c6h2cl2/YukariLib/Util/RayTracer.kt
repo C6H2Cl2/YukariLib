@@ -21,18 +21,6 @@ class RayTracer {
     private var s_side: Int = 0
     private var c_cube: CubeIndexed? = null
 
-    private val cubeList = ArrayList<CubeIndexed>()
-
-    /**
-     * @param subHit セレクトボックスの描画に使う
-     * @param cube 枠の形
-     * @param pos ブロックの座標
-     */
-    fun addCube(subHit: Int, cube: Cube, pos: BlockPos): RayTracer {
-        cubeList.add(CubeIndexed(subHit, cube.add(pos)))
-        return this
-    }
-
     private fun traceSide(start: Pointer3D, end: Pointer3D, cube: Cube, side: Int) {
         pointer.set(start)
         val hit: Pointer3D? = when (side) {
@@ -96,8 +84,11 @@ class RayTracer {
      * @param start Pointer3D(startVec)
      * @param end Pointer3D(endVec)
      */
-    fun rayTraceCubes(start: Pointer3D, end: Pointer3D, pos: BlockPos, block: Block?): MovingObjectPosition? {
-        val mop = rayTraceCubes(start, end, this.cubeList)
+    fun rayTraceCubes(start: Pointer3D, end: Pointer3D, cubeList: ArrayList<CubeIndexed>, pos: BlockPos, block: Block?): MovingObjectPosition? {
+        cubeList.forEach {
+            it.add(pos)
+        }
+        val mop = rayTraceCubes(start, end, cubeList)
         if (mop != null) {
             mop.typeOfHit = MovingObjectPosition.MovingObjectType.BLOCK
             mop.blockX = pos.getX()
