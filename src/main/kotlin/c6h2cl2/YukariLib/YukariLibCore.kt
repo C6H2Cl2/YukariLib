@@ -1,5 +1,6 @@
 package c6h2cl2.YukariLib
 
+import c6h2cl2.YukariLib.Util.Register.RegisterHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.launchwrapper.Launch
 import net.minecraftforge.fml.common.Mod
@@ -37,6 +38,9 @@ class YukariLibCore {
             }
         }
         loadMeta()
+        val register = RegisterHandler(MOD_ID)
+        register.build(Register)
+        register.handle(event)
     }
 
     private fun loadMeta() {
